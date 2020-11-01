@@ -6,6 +6,7 @@ const app = Vue.createApp({
             image: './assets/images/socks_blue.jpg',
             url: 'https://www.bbc.co.uk/news',
             inventory: 100,
+            inStock: true,
             onSale: false,
             cart: 0,
             details: ['50% cotton', '30% wool', '20% polyester'],
@@ -19,7 +20,10 @@ const app = Vue.createApp({
                 { id: '3003', name: 'M' },
                 { id: '3004', name: 'L' },
                 { id: '3005', name: 'XL' }
-            ]
+            ],
+            isActive: true,
+            activeClass: 'active',
+            outOfStockImageClass: 'out-of-stock-img'
         }
     },
     methods: {
