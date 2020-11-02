@@ -3,6 +3,10 @@ app.component('product-display', {
     premium: {
       type: Boolean,
       required: true
+    },
+    cart: {
+      type: Array,
+      required: true
     }
   },
   template:
@@ -29,7 +33,7 @@ app.component('product-display', {
             </div>
             <p v-show="onSale && inStock > 0">{{ onSaleText }}</p>
             <button class="button" @click="addToCart" :disabled="!inStock" :class="{ disabledButton: !inStock }">Add to Cart</button>
-            <button class="button" @click="removeFromCart" v-show="cart > 0">Remove from Cart</button>
+            <button class="button" @click="removeFromCart" v-show="cart.length > 0">Remove from Cart</button>
           </div>
         </div>
       </div>`,
@@ -60,13 +64,13 @@ app.component('product-display', {
   },
   methods: {
     addToCart() {
-      this.cart += 1
+      console.log(this.cart)
+      this.$emit('add-to-cart', this.variants[this.selectedVariant].id)
     },
     removeFromCart() {
-      if (this.cart > 0) this.cart -= 1
+      this.$emit('remove-from-cart', this.variants[this.selectedVariant].id)
     },
     updateImage(variant) {
-      console.log(variant)
       this.selectedVariant = variant
     }
   },
