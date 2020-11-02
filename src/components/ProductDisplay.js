@@ -36,6 +36,8 @@ app.component('product-display', {
             <button class="button" @click="removeFromCart" v-show="cart.length > 0">Remove from Cart</button>
           </div>
         </div>
+        <review-list v-if="reviews.length" :reviews="reviews"></review-list>
+        <review-form @review-submitted="addReview"></review-form>
       </div>`,
   data() {
     return {
@@ -59,7 +61,8 @@ app.component('product-display', {
       ],
       isActive: true,
       activeClass: 'active',
-      outOfStockImageClass: 'out-of-stock-img'
+      outOfStockImageClass: 'out-of-stock-img',
+      reviews: []
     }
   },
   methods: {
@@ -72,6 +75,14 @@ app.component('product-display', {
     },
     updateImage(variant) {
       this.selectedVariant = variant
+    },
+    addReview(review) {
+      if(review.name === '' || review.review === '' || review.rating === null)
+      {
+        alert('Please fill in all details on the form')
+        return
+      }
+      this.reviews.push(review)
     }
   },
   computed: {
