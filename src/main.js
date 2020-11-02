@@ -1,18 +1,17 @@
 const app = Vue.createApp({
     data() {
         return {
+            brand: 'Vuecomfy',
             product: 'Socks',
             description: 'This is a description',
-            image: './assets/images/socks_blue.jpg',
             url: 'https://www.bbc.co.uk/news',
-            inventory: 100,
-            inStock: true,
             onSale: false,
             cart: 0,
             details: ['50% cotton', '30% wool', '20% polyester'],
+            selectedVariant: 0,
             variants: [
-                { id: '2234', colour: 'green', image: './assets/images/socks_green.jpg' },
-                { id: '2235', colour: 'blue', image: './assets/images/socks_blue.jpg' }
+                { id: '2234', colour: 'green', image: './assets/images/socks_green.jpg', quantity: 0 },
+                { id: '2235', colour: 'blue', image: './assets/images/socks_blue.jpg', quantity: 15 }
             ],
             sizes: [ 
                 { id: '3001', name: 'XS' },
@@ -28,13 +27,25 @@ const app = Vue.createApp({
     },
     methods: {
         addToCart() {
-            this.cart += 1;
+            this.cart += 1
         },
         removeFromCart() {
-            if(this.cart > 0) this.cart -= 1;
+            if(this.cart > 0) this.cart -= 1
         },
-        updateImage(variantImage) {
-            this.image = variantImage
+        updateImage(variant) {
+            console.log(variant)
+            this.selectedVariant = variant
+        }
+    },
+    computed: {
+        image() {
+            return this.variants[this.selectedVariant].image
+        },
+        inStock() {
+            return this.variants[this.selectedVariant].quantity
+        },
+        onSaleText() {
+            return this.brand + ' ' + this.product + ' is on sale'
         }
     }
 })
