@@ -7,6 +7,7 @@ const app = Vue.createApp({
             url: 'https://www.bbc.co.uk/news',
             onSale: false,
             cart: 0,
+            premium: true,
             details: ['50% cotton', '30% wool', '20% polyester'],
             selectedVariant: 0,
             variants: [
